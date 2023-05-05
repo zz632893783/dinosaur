@@ -1,1 +1,0 @@
-<template>表单输入绑定</template>
