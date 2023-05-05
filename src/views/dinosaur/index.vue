@@ -1,5 +1,4 @@
 <template>
-    <!-- {{ (world.clock >= 6 && world.clock < 18) ? 0 : 100 }} -->
     <canvas ref="canvas" :width="world.width" :height="world.height" :style="`filter: invert(${(clock >= 6 && clock < 18) ? 0 : 100}%);`"></canvas>
 </template>
 <script setup>
@@ -21,22 +20,9 @@ import quadraCactus from './quadraCactus.png';
 import pterosaurUp from './pterosaurUp.png';
 import pterosaurDown from './pterosaurDown.png';
 const imageResource = {
-    pavementBulge,
-    pavementConcave,
-    dinosaurBothFootstep,
-    dinosaurLeftFootstep,
-    dinosaurRightFootstep,
-    dinosaurCreepLeftFootstep,
-    dinosaurCreepRightFootstep,
-    dinosaurDie,
-    cloud,
-    bigCactus,
-    middleCactus,
-    doubleCactus,
-    tripleCactus,
-    quadraCactus,
-    pterosaurUp,
-    pterosaurDown
+    pavementBulge, pavementConcave, cloud,
+    dinosaurBothFootstep, dinosaurLeftFootstep, dinosaurRightFootstep, dinosaurCreepLeftFootstep, dinosaurCreepRightFootstep, dinosaurDie,
+    bigCactus, middleCactus, doubleCactus, tripleCactus, quadraCactus, pterosaurUp, pterosaurDown
 };
 const canvas = ref('canvas');
 const clock = ref(6);
@@ -77,10 +63,6 @@ const world = {
             return false;
         }
         clock.value = (clock.value + 0.024 * world.level) % 24;
-        // if (!world.enable) {
-        //     return false;
-        // }
-        // world.enable = false;
         dinosaur.next();
         // 地面移动
         world.pavementList.forEach(pavement => (pavement.x = pavement.x - world.speed * world.level));
@@ -263,7 +245,6 @@ class Cloud {
         this.height = 15;
         const skyHeight = world.height - world.horizonHeight - this.height;
         this.y = Math.random() * skyHeight;
-        // this.speed = world.speed / (skyHeight / this.y);
     }
     next () {
         this.x = this.x - this.speed;
@@ -304,7 +285,6 @@ function render () {
     drawCloud();
     drawObstacle();
     drawDinosaur();
-    // if () {}
     world.animation = window.requestAnimationFrame(render);
 }
 // 创建地平线上的物体（不会发生碰撞）
